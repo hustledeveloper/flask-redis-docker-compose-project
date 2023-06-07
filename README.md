@@ -1,1 +1,2 @@
-# flask-redis-docker-compose-project
+Run `docker-compose build'
+Run `docker-compose up'
