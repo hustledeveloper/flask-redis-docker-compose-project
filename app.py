@@ -45,6 +45,10 @@ def process_user(user):
     conn.commit()
     cur.close()
     conn.close()
+    
+@app.route('/hello', methods=['GET'])
+def hello():
+    return 'Welcome to the redis queue task!'
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000, debug=True)

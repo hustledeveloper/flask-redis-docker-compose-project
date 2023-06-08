@@ -17,6 +17,8 @@ services:
       - "6379:6379"
   postgres:
     image: postgres
+    ports:
+      - "5430:5430"
     environment:
       - POSTGRES_PASSWORD=mypassword
   worker1:
