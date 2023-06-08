@@ -16,12 +16,19 @@ def enqueue_user():
     return user, 200
 
 def process_user(user):
+    host = 'localhost'  
+    port = 5430
+    dbname = 'postgres'  
+    user = 'postgres' 
+    password = 'postgres' 
+
+    # PostgreSQL veritabanına bağlanın
     conn = psycopg2.connect(
-        host='postgres',
-        port=5432,
-        dbname='mydatabase',
-        user='myuser',
-        password='mypassword'
+        host=host,
+        port=port,
+        dbname=dbname,
+        user=user,
+        password=password
     )
     cur = conn.cursor()
 

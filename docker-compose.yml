@@ -9,18 +9,21 @@ services:
     volumes:
       - .:/app
     depends_on:
-      - redis
-      - postgres
+      - db
   redis:
     image: redis
     ports:
       - "6379:6379"
-  postgres:
+  db:
     image: postgres
-    ports:
-      - "5430:5430"
     environment:
-      - POSTGRES_PASSWORD=mypassword
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - 5430:5432
+    volumes:
+      - ./data:/var/lib/postgresql/data
   worker1:
     build:
       context: .
@@ -37,3 +40,15 @@ services:
       - .:/app
     depends_on:
       - redis
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - 8080:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=your_email@example.com
+      - PGADMIN_DEFAULT_PASSWORD=your_password
+    depends_on:
+      - db
+networks:
+  default:
+    name: omer-network
