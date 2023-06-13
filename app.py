@@ -1,9 +1,11 @@
-from flask import Flask, request
-from redis import Redis
+from flask import Flask, request, jsonify
 from rq import Queue
-from datetime import datetime
-import json
-import psycopg2
+from redis import Redis
+import logging
+from utils import process_user
+
+# Log settings
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 app = Flask(__name__)
 redis_conn = Redis(host='redis', port=6379)
@@ -12,50 +14,9 @@ queue = Queue(connection=redis_conn)
 @app.route('/users', methods=['POST'])
 def enqueue_user():
     user = request.get_json()
-    
-    return user, 200
-
-def process_user(user):
-    host = 'localhost'  
-    port = 5430
-    dbname = 'postgres'  
-    user = 'postgres' 
-    password = 'postgres' 
-
-    # PostgreSQL veritabanına bağlanın
-    conn = psycopg2.connect(
-        host=host,
-        port=port,
-        dbname=dbname,
-        user=user,
-        password=password
-    )
-    cur = conn.cursor()
-
-    insert_query = """
-        INSERT INTO users (id, first_name, last_name, email, gender, ip_address, user_name, agent, country, created_at)
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-    """
-    cur.execute(insert_query, (
-        user['id'],
-        user['first_name'],
-        user['last_name'],
-        user['email'],
-        user['gender'],
-        user['ip_address'],
-        user['user_name'],
-        user['agent'],
-        user['country'],
-        datetime.now()
-    ))
-
-    conn.commit()
-    cur.close()
-    conn.close()
-    
-@app.route('/hello', methods=['GET'])
-def hello():
-    return 'Welcome to the redis queue task!'
+    queue.enqueue(process_user, user)
+    logging.info('User enqueued successfully')
+    return jsonify({'message': 'User enqueued successfully'}), 200
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000)
