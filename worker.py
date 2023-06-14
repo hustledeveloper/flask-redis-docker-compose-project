@@ -1,15 +1,12 @@
-import os
-import redis
-import psycopg2
+from redis import Redis
 from rq import Worker, Queue, Connection
-from utils import process_user
+import os
 
 listen = ['default']
 
 redis_url = os.getenv('REDIS_URL', 'redis://redis:6379')
-conn = redis.from_url(redis_url)
 
 if __name__ == '__main__':
-    with Connection(conn):
+    with Connection(Redis.from_url(redis_url)):
         worker = Worker(list(map(Queue, listen)))
-        worker.work(process_user)
+        worker.work()
