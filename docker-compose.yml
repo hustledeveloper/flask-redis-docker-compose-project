@@ -13,7 +13,6 @@ services:
       - ./app-data:/app/data16
     networks:
       - omer-network
-
   worker:
     build:
       context: .
@@ -25,7 +24,6 @@ services:
       - ./app-data:/app/data15
     networks:
       - omer-network
-
   redis:
     image: redis
     ports:

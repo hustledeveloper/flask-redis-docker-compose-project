@@ -1,4 +1,16 @@
+import os
+import redis
 import psycopg2
+import json
+
+import logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+def enqueue_user_to_redis(user):
+    redis_url = os.getenv('REDIS_URL', 'redis://redis:6379')
+    conn = redis.from_url(redis_url)
+    conn.rpush('user_queue', json.dumps(user))
+    logging.info('UUUUUUUUUUUUUUUUUUUUURRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRUU enqueued to Redis: %s', user)
 
 def process_user(user):
     try:
@@ -29,5 +41,6 @@ def process_user(user):
         conn.commit()
         cursor.close()
         conn.close()
+        logging.info('PPPPPPPPPPPPPPPPPPPPPPPPPPP processed: %s', user)
     except psycopg2.Error as e:
-        print("Error inserting user:", e)
+        logging.error('Error inserting user: %s', e)
