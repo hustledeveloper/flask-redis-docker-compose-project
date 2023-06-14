@@ -12,6 +12,5 @@ def receive_user_data():
     redis.rpush('user_queue', json_data.encode())
     return 'User data received and added to the queue.'
 
-
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000)

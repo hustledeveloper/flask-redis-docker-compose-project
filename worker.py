@@ -1,11 +1,8 @@
 from redis import Redis
-
 import psycopg2
 import json
 
-
 redis = Redis(host='redis', port=6379)
-
 
 def process_user_data(user):
     try:
