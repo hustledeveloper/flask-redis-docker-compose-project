@@ -9,6 +9,8 @@ services:
     depends_on:
       - db
       - redis
+    volumes:
+      - ./app-data:/app/data16
     networks:
       - omer-network
 
@@ -19,6 +21,8 @@ services:
     depends_on:
       - db
       - redis
+    volumes:
+      - ./app-data:/app/data15
     networks:
       - omer-network
 
