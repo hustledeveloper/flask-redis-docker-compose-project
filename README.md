@@ -5,9 +5,11 @@ Bu proje, Flask, Redis ve Docker Compose kullanarak basit bir rq uygulaması gel
 Proje klasöründe aşağıdaki adımları takip ederek proje çalıştırılabilir:
 
 1. İlk olarak, Docker Compose ile proje bağımlılıklarını oluşturmak için aşağıdaki komutu çalıştırın:
+
 docker-compose build
 
-2. Daha sonra, aşağıdaki komutu kullanarak projeyi çalıştırın:
+3. Daha sonra, aşağıdaki komutu kullanarak projeyi çalıştırın:
+
 docker-compose up
 
 Bu komut, Flask uygulamasını, Redis veritabanını ve diğer bağımlılıkları içeren konteynerleri başlatacaktır.
