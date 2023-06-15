@@ -14,7 +14,7 @@ docker-compose up
 
 Bu komut, Flask uygulamasını, Redis veritabanını ve diğer bağımlılıkları içeren konteynerleri başlatacaktır.
 
-3. Projeyi başarıyla çalıştırdıktan sonra, web tarayıcınızda `http://localhost:5000` adresine giderek uygulamayı görüntüleyebilirsiniz.
+3. Projeyi başarıyla çalıştırdıktan sonra, web tarayıcınızda `http://localhost:5000/users` adresine giderek uygulamaya veri girebilirsiniz.
 
 ## Sunum Dosyası
 
