@@ -25,7 +25,7 @@ services:
       - ./app-data:/app/data15
     networks:
       - omer-network
-
+    scale: 4
   redis:
     image: redis
     ports:
