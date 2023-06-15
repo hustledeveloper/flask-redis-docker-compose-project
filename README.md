@@ -20,7 +20,7 @@ Bu komut, Flask uygulamasını, Redis veritabanını ve diğer bağımlılıklar
 
 Projenin detaylarını içeren sunum dosyasına aşağıdaki linkten erişebilirsiniz:
 
-[Sunum Dosyası](https://github.com/hustledeveloper/flask-redis-docker-compose-project/blob/main/sunum.pdf)
+[Sunum Dosyası](https://github.com/hustledeveloper/flask-redis-docker-compose-project/blob/main/info.pdf)
 
 Bu sunum dosyası, projenin amacını, kullanılan teknolojileri ve adımları daha detaylı olarak anlatmaktadır.
 
